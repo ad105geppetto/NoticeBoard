@@ -1,3 +1,6 @@
+const db = require("../bin/index");
+const noticeBoard = db.noticeBoard;
+
 module.exports = {
   /**
    * 함수 설명

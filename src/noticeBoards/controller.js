@@ -1,4 +1,4 @@
-const repository = require("../repositoriy");
+const repository = require("./repository");
 
 module.exports = {
   /**
