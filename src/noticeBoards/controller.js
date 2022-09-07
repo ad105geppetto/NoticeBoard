@@ -56,4 +56,16 @@ module.exports = {
         .json({ message: "INTERNAL SERVER ERROR" });
     }
   },
+  delete: async (req, res) => {
+    try {
+      const noticeBoardId = Number(req.params.id);
+      const password = req.headers.authorization;
+      await service.delete(noticeBoardId, password);
+      return res.status(StatusCodes.NO_CONTENT).end();
+    } catch (error) {
+      return res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ message: "INTERNAL SERVER ERROR" });
+    }
+  },
 };
