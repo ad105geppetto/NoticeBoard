@@ -16,7 +16,7 @@ module.exports = {
     }
 
     return await noticeBoard.findAll({
-      order: [["updated_at", order]],
+      order: [["updatedAt", order]],
       offset: offset,
       limit: limit,
     });

@@ -4,9 +4,14 @@ const { StatusCodes } = require("http-status-codes");
 module.exports = {
   getAll: async (req, res) => {
     try {
-      const infiniteScrollingData = req;
-      const result = await service.getAll(infiniteScrollingData);
-      return res.status(StatusCodes.OK).json({ result, message: "OK" });
+      const infiniteScrollingData = {
+        order: req.query.order,
+        page: Number(req.query.page),
+        limit: Number(req.query.limit),
+      };
+      const data = await service.getAll(infiniteScrollingData);
+
+      return res.status(StatusCodes.OK).json({ data, message: "OK" });
     } catch (error) {
       return res
         .status(StatusCodes.INTERNAL_SERVER_ERROR)
