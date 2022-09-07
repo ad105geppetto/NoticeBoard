@@ -1,5 +1,5 @@
 const db = require("../bin/index");
-const noticeBoard = db.noticeBoard;
+const noticeBoard = db.noticeBoards;
 
 module.exports = {
   /**
