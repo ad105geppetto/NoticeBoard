@@ -29,7 +29,7 @@ module.exports = {
    * @returns 특정 게시글 레포지토리 반환
    */
   getOne: async (id) => {
-    return await post.findOne({ where: { id: id } });
+    return await noticeBoard.findOne({ where: { id: id } });
   },
   /**
    * 함수 설명
