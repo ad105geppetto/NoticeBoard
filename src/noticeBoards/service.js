@@ -1,4 +1,5 @@
 const repository = require("./repository");
+const hashPassword = require("./modules/hashPassword");
 
 module.exports = {
   /**
@@ -16,5 +17,21 @@ module.exports = {
    */
   getOne: async (id) => {
     return await repository.getOne(id);
+  },
+  /**
+   * 함수 설명
+   * @param {{
+   *    title: string,
+   *    content: string,
+   *    password: string}} object - 게시글에 필요한 정보
+   * @returns 레포지토리 반환
+   */
+  post: async (noticeBoardData) => {
+    const hashInfo = hashPassword(noticeBoardData.password);
+
+    noticeBoardData.password = hashInfo.hash;
+    noticeBoardData.salt = hashInfo.salt;
+
+    return await repository.post(noticeBoardData);
   },
 };
