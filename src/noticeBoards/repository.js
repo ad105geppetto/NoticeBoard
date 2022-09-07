@@ -39,7 +39,7 @@ module.exports = {
    */
   post: async (noticeBoardData) => {
     const { title, content, password, salt } = noticeBoardData;
-    return await post.create({
+    return await noticeBoard.create({
       title,
       content,
       password,
