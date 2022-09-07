@@ -4,4 +4,5 @@ const router = express.Router();
 
 router.get("/boards", controller.getAll);
 router.get("/boards/:id", controller.getOne);
+router.post("/boards", controller.post);
 module.exports = router;
