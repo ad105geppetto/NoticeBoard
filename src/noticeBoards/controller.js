@@ -13,4 +13,15 @@ module.exports = {
         .json({ message: "INTERNAL SERVER ERROR" });
     }
   },
+  getOne: async (req, res) => {
+    try {
+      const id = Number(req.params.id);
+      const result = await service.getOne(id);
+      return res.status(StatusCodes.OK).json({ result, message: "OK" });
+    } catch (error) {
+      return res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ message: "INTERNAL SERVER ERROR" });
+    }
+  },
 };
