@@ -5,6 +5,9 @@ const app = express();
 const port = 3000;
 const noticeBoardsRouter = require("./noticeBoards/router");
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 db.sequelize
   .sync({ alter: true })
   .then(() => {
