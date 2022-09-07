@@ -1,5 +1,6 @@
 const repository = require("./repository");
 const { hashPassword } = require("./modules/hashPassword");
+const NotCreateNoticeBoard = require("./exception/NotCreateNoticeBoard");
 
 module.exports = {
   /**
@@ -27,6 +28,10 @@ module.exports = {
    * @returns 레포지토리 반환
    */
   post: async (noticeBoardData) => {
+    if (noticeBoardData.title.length > 20 || noticeBoardData.content.length > 200) {
+      throw new NotCreateNoticeBoard();
+    }
+
     const hashInfo = hashPassword(noticeBoardData.password);
 
     noticeBoardData.password = hashInfo.hash;
@@ -44,6 +49,10 @@ module.exports = {
    * @returns 레포지토리 반환
    */
   patch: async (noticeBoardId, noticeBoardData) => {
+    if (noticeBoardData.title.length > 20 || noticeBoardData.content.length > 200) {
+      throw new NotCreateNoticeBoard();
+    }
+
     return await repository.patch(noticeBoardId, noticeBoardData);
   },
   /**
