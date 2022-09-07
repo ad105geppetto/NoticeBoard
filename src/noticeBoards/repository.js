@@ -18,6 +18,7 @@ module.exports = {
     }
 
     return await noticeBoard.findAll({
+      attributes: { exclude: ["password", "salt"] },
       order: [["updatedAt", order]],
       offset: offset,
       limit: limit,
