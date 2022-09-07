@@ -46,4 +46,13 @@ module.exports = {
   patch: async (noticeBoardId, noticeBoardData) => {
     return await repository.patch(noticeBoardId, noticeBoardData);
   },
+  /**
+   * 함수 설명
+   * @param {number} id - 게시글 아이디
+   * @param {number} password - 게시글 비밀번호
+   * @returns 레포지토리 반환
+   */
+  delete: async (noticeBoardId, password) => {
+    return await repository.delete(noticeBoardId, password);
+  },
 };
