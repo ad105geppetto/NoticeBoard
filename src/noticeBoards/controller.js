@@ -1,12 +1,16 @@
 const service = require("./service");
+const { StatusCodes } = require("http-status-codes");
 
 module.exports = {
-  /**
-   * 함수 설명
-   * @returns 전체 공지사항 게시글 레포지토리 반환
-   */
   getAll: async (req, res) => {
-    const result = await service.getAll();
-    res.json({ result, message: "OK" });
+    try {
+      const infiniteScrollingData = req;
+      const result = await service.getAll(infiniteScrollingData);
+      return res.status(StatusCodes.OK).json({ result, message: "OK" });
+    } catch (error) {
+      return res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ message: "INTERNAL SERVER ERROR" });
+    }
   },
 };
