@@ -29,4 +29,21 @@ module.exports = {
   getOne: async (id) => {
     return await post.findOne({ where: { id: id } });
   },
+  /**
+   * 함수 설명
+   * @param {{
+   *    title: string,
+   *    content: string,
+   *    password: string
+   *    salt: string}} object - 게시글 데이터베이스에 필요한 정보
+   */
+  post: async (noticeBoardData) => {
+    const { title, content, password, salt } = noticeBoardData;
+    return await post.create({
+      title,
+      content,
+      password,
+      salt,
+    });
+  },
 };
