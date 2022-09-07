@@ -15,5 +15,4 @@ const makePasswordHashed = (plainPassword, salt) => {
   return crypto.pbkdf2Sync(plainPassword, salt, 10000, 64, "sha256").toString("base64");
 };
 
-module.exports = hashPassword;
-module.exports = makePasswordHashed;
+module.exports = { hashPassword, makePasswordHashed };

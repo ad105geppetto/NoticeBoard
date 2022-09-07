@@ -1,5 +1,7 @@
 const db = require("../bin/index");
 const noticeBoard = db.noticeBoards;
+const { sequelize } = require("../bin/index");
+const { makePasswordHashed } = require("./modules/hashPassword");
 
 module.exports = {
   /**
@@ -44,6 +46,44 @@ module.exports = {
       content,
       password,
       salt,
+    });
+  },
+  /**
+   * 함수 설명
+   * @param {number} id - 게시글 아이디
+   * @param {{
+   * title: string,
+   * content: string,
+   * password: string}} object - 게시글을 수정할 정보
+   */
+  patch: async (noticeBoardId, noticeBoardData) => {
+    const { title, content, password } = noticeBoardData;
+    const newNoticeBoardId = Number(noticeBoardId);
+
+    return await sequelize.transaction(async (transaction) => {
+      const newNoticeBoard = await noticeBoard.findByPk(newNoticeBoardId, {
+        raw: true,
+        transaction,
+      });
+      const newNoticeBoardPassword = newNoticeBoard.password;
+      const newNoticeBoardSalt = newNoticeBoard.salt;
+      console.log(newNoticeBoardPassword);
+      console.log(makePasswordHashed(password, newNoticeBoardSalt));
+      if (newNoticeBoardPassword !== makePasswordHashed(password, newNoticeBoardSalt)) {
+        throw new Error();
+      }
+
+      await noticeBoard.update(
+        {
+          title: title,
+          content: content,
+        },
+        {
+          where: { id: newNoticeBoardId },
+          raw: true,
+          transaction,
+        }
+      );
     });
   },
 };

@@ -1,5 +1,5 @@
 const repository = require("./repository");
-const hashPassword = require("./modules/hashPassword");
+const { hashPassword } = require("./modules/hashPassword");
 
 module.exports = {
   /**

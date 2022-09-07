@@ -46,7 +46,7 @@ module.exports = {
       const noticeBoardData = {
         title: req.body.title,
         content: req.body.content,
-        password: req.body.type,
+        password: req.body.password,
       };
       await service.patch(noticeBoardId, noticeBoardData);
       return res.status(StatusCodes.OK).json({ message: "OK" });
