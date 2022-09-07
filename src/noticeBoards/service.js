@@ -1,5 +1,6 @@
 const repository = require("./repository");
 const { hashPassword } = require("./modules/hashPassword");
+const OnlyString = require("./exception/OnlyString");
 const NotCreateNoticeBoard = require("./exception/NotCreateNoticeBoard");
 
 module.exports = {
@@ -31,6 +32,9 @@ module.exports = {
     if (noticeBoardData.title.length > 20 || noticeBoardData.content.length > 200) {
       throw new NotCreateNoticeBoard();
     }
+    if (noticeBoardData.password < 6 || !noticeBoardData.password.match(/[0-9]+/)) {
+      throw new OnlyString();
+    }
 
     const hashInfo = hashPassword(noticeBoardData.password);
 
@@ -52,6 +56,9 @@ module.exports = {
     if (noticeBoardData.title.length > 20 || noticeBoardData.content.length > 200) {
       throw new NotCreateNoticeBoard();
     }
+    if (noticeBoardData.password < 6 || !noticeBoardData.password.match(/[0-9]+/)) {
+      throw new OnlyString();
+    }
 
     return await repository.patch(noticeBoardId, noticeBoardData);
   },
@@ -62,6 +69,9 @@ module.exports = {
    * @returns 레포지토리 반환
    */
   delete: async (noticeBoardId, password) => {
+    if (password < 6 || !password.match(/[0-9]+/)) {
+      throw new OnlyString();
+    }
     return await repository.delete(noticeBoardId, password);
   },
 };

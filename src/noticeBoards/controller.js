@@ -36,8 +36,8 @@ module.exports = {
       return res.status(StatusCodes.CREATED).json({ message: "OK" });
     } catch (error) {
       return res
-        .status(StatusCodes.INTERNAL_SERVER_ERROR)
-        .json({ message: "INTERNAL SERVER ERROR" });
+        .status(error.statusCode || StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ message: error.message } || { message: "INTERNAL SERVER ERROR" });
     }
   },
   patch: async (req, res) => {
@@ -52,8 +52,8 @@ module.exports = {
       return res.status(StatusCodes.OK).json({ message: "OK" });
     } catch (error) {
       return res
-        .status(StatusCodes.INTERNAL_SERVER_ERROR)
-        .json({ message: "INTERNAL SERVER ERROR" });
+        .status(error.statusCode || StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ message: error.message } || { message: "INTERNAL SERVER ERROR" });
     }
   },
   delete: async (req, res) => {
@@ -64,8 +64,8 @@ module.exports = {
       return res.status(StatusCodes.NO_CONTENT).end();
     } catch (error) {
       return res
-        .status(StatusCodes.INTERNAL_SERVER_ERROR)
-        .json({ message: "INTERNAL SERVER ERROR" });
+        .status(error.statusCode || StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ message: error.message } || { message: "INTERNAL SERVER ERROR" });
     }
   },
 };
