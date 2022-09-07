@@ -34,4 +34,16 @@ module.exports = {
 
     return await repository.post(noticeBoardData);
   },
+  /**
+   * 함수 설명
+   * @param {number} id - 게시글 아이디
+   * @param {{
+   *    title: string,
+   *    content: string,
+   *    password: string}} object - 게시글을 수정할 정보
+   * @returns 레포지토리 반환
+   */
+  patch: async (noticeBoardId, noticeBoardData) => {
+    return await repository.patch(noticeBoardId, noticeBoardData);
+  },
 };
