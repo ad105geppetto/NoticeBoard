@@ -11,4 +11,4 @@ const hashPassword = (password) => {
   };
 };
 
-export default hashPassword;
+module.exports = hashPassword;
