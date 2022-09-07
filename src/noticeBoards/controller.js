@@ -24,4 +24,15 @@ module.exports = {
         .json({ message: "INTERNAL SERVER ERROR" });
     }
   },
+  post: async (req, res) => {
+    try {
+      const noticeBoardData = req.body;
+      await service.post(noticeBoardData);
+      return res.status(StatusCodes.CREATED).json({ message: "OK" });
+    } catch (error) {
+      return res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ message: "INTERNAL SERVER ERROR" });
+    }
+  },
 };
