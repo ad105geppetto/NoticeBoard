@@ -40,4 +40,20 @@ module.exports = {
         .json({ message: "INTERNAL SERVER ERROR" });
     }
   },
+  patch: async (req, res) => {
+    try {
+      const noticeBoardId = Number(req.params.id);
+      const noticeBoardData = {
+        title: req.body.title,
+        content: req.body.content,
+        password: req.body.type,
+      };
+      await service.patch(noticeBoardId, noticeBoardData);
+      return res.status(StatusCodes.OK).json({ message: "OK" });
+    } catch (error) {
+      return res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ message: "INTERNAL SERVER ERROR" });
+    }
+  },
 };
