@@ -21,4 +21,12 @@ module.exports = {
       limit: limit,
     });
   },
+  /**
+   * 함수 설명
+   * @param {number} id - 특정 게시글 아이디
+   * @returns 특정 게시글 레포지토리 반환
+   */
+  getOne: async (id) => {
+    return await post.findOne({ where: { id: id } });
+  },
 };
