@@ -67,8 +67,7 @@ module.exports = {
       });
       const newNoticeBoardPassword = newNoticeBoard.password;
       const newNoticeBoardSalt = newNoticeBoard.salt;
-      console.log(newNoticeBoardPassword);
-      console.log(makePasswordHashed(password, newNoticeBoardSalt));
+
       if (newNoticeBoardPassword !== makePasswordHashed(password, newNoticeBoardSalt)) {
         throw new Error();
       }
