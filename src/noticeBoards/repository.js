@@ -86,4 +86,35 @@ module.exports = {
       );
     });
   },
+  /**
+   * 함수 설명
+   * @param {number} id - 게시글 아이디
+   * @param {number} password - 게시글 비밀번호
+   * @returns 레포지토리 반환
+   */
+  delete: async (noticeBoardId, password) => {
+    const newNoticeBoardId = noticeBoardId;
+    return await sequelize
+      .transaction(async (transaction) => {
+        const newNoticeBoard = await noticeBoard.findByPk(newNoticeBoardId, {
+          raw: true,
+          transaction,
+        });
+        const newNoticeBoardPassword = newNoticeBoard.password;
+        const newNoticeBoardSalt = newNoticeBoard.salt;
+
+        if (newNoticeBoardPassword !== makePasswordHashed(password, newNoticeBoardSalt)) {
+          throw new Error();
+        }
+
+        await noticeBoard.destroy({
+          where: { id: noticeBoardId },
+          raw: true,
+          transaction,
+        });
+      })
+      .catch((err) => {
+        throw err;
+      });
+  },
 };
