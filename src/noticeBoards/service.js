@@ -9,4 +9,12 @@ module.exports = {
   getAll: async (infiniteScrollingData) => {
     return await repository.getAll(infiniteScrollingData);
   },
+  /**
+   * 함수 설명
+   * @param {number} id - 게시글 아이디
+   * @returns 특정 게시글 레포지토리 반환
+   */
+  getOne: async (id) => {
+    return await repository.getOne(id);
+  },
 };
