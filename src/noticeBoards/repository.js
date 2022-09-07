@@ -4,9 +4,21 @@ const noticeBoard = db.noticeBoards;
 module.exports = {
   /**
    * 함수 설명
+   * @param {{order:string, page:number, limit: number}} object 무한 스크롤 변수 모음
    * @returns 전체 공지사항 게시글 레포지토리 반환
    */
-  getAll: async () => {
-    return await noticeBoard.findAll();
+  getAll: async (infiniteScrollingData) => {
+    const { order, page, limit } = infiniteScrollingData;
+    let offset = 0;
+
+    if (page > 1) {
+      offset = limit * (page - 1);
+    }
+
+    return await noticeBoard.findAll({
+      order: [["updated_at", order]],
+      offset: offset,
+      limit: limit,
+    });
   },
 };
